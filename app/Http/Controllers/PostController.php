@@ -10,28 +10,28 @@ class PostController extends Controller
     //
     public function index()
     {
-        return "hola pagina de listado de registros desde el controlador";
+        return view('posts.index');
     }
 
     public function create()
     {
-        return "aqui se mostrara el formulario para crear un registro desde el controlador";
+        return view('posts.create');
     }
 
     public function store(Request $request)
     {
-        // Aqui se procesara el formulario para crear un registro
         return "aqui se procesara el formulario para crear un registro desde el controlador";
     }
 
     public function show($post)
     {
-        return "aqui se mostrara el registro con nombre: $post desde el controlador";
+        //compact('post') => ['post' => $post]
+        return view('posts.show',compact('post'));
     }
 
     public function edit($post)
     {
-        return "aqui se mostrara el formulario para editar un registro: $post desde el controlador";
+        return view('posts.edit',compact('post'));
     }
 
     public function update(Request $request, $post)

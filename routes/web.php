@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\HomeController;
 
-Route::get('/', [HomeController::class, 'index']);
+Route::get('/', HomeController::class);
 
 /*
 //ruta para mostrar el listado de registros
@@ -35,8 +35,20 @@ route::put('/posts/{post}',  [PostController::class, 'update'])
 route::delete('/posts/{post}',  [PostController::class, 'destroy'])
 ->name('posts.destroy');
 */
-
-// Ruta de recursos para el controlador PostController para hacer las rutas mas cortas
+/*
+// Ruta de recursos para el controlador PostController para hacer las rutas mas cortas, para tipo crud
 Route::Resource('articulos',PostController::class)
 ->parameters(['articulos' => 'post'])
 ->names('posts');
+*/
+
+// Rutas de recursos utilizando Route::Controller para un grupo de rutas con el mismo controlador para pagos, mas conplejas
+Route::prefix('posts')->name('posts.')->controller(PostController::class)->group(function(){
+    Route::get('/', 'index')->name('index');
+    Route::get('/create', 'create')->name('create');
+    Route::post('/', 'store')->name('store');
+    Route::get('/{post}', 'show')->name('show');
+    Route::get('/{post}/edit', 'edit')->name('edit');
+    Route::put('/{post}', 'update')->name('update');
+    Route::delete('/{post}', 'destroy')->name('destroy');
+});
