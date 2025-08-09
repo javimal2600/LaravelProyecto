@@ -8,6 +8,5 @@
 </head>
 <body>
     <h1>Aqui se mostrará el detalle del post {{$post}}</h1>
-    <p><?php echo $prueba?></p>
 </body>
 </html>

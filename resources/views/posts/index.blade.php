@@ -8,5 +8,9 @@
 </head>
 <body>
     <h1>Aqui se mostrará el listado de posts</h1>
+   <script>
+    let posts = @json($posts);
+    console.log(posts);
+   </script>
 </body>
 </html>

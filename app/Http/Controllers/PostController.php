@@ -10,7 +10,15 @@ class PostController extends Controller
     //
     public function index()
     {
-        return view('posts.index');
+        $posts=[
+            [
+            'title' => 'Mi primer post',
+            'content' => 'Contenido del post',
+            ],
+            'title' => 'Mi segundo post',
+            'content' => 'Contenido del post',
+        ];
+        return view('posts.index', compact('posts'));
     }
 
     public function create()
