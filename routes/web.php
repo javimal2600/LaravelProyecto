@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\HomeController;
+use Illuminate\Support\Facades\DB;
 
 Route::get('/', HomeController::class);
 
@@ -43,12 +44,23 @@ Route::Resource('articulos',PostController::class)
 */
 
 // Rutas de recursos utilizando Route::Controller para un grupo de rutas con el mismo controlador para pagos, mas conplejas
-Route::prefix('posts')->name('posts.')->controller(PostController::class)->group(function(){
-    Route::get('/', 'index')->name('index');
-    Route::get('/create', 'create')->name('create');
-    Route::post('/', 'store')->name('store');
-    Route::get('/{post}', 'show')->name('show');
-    Route::get('/{post}/edit', 'edit')->name('edit');
-    Route::put('/{post}', 'update')->name('update');
-    Route::delete('/{post}', 'destroy')->name('destroy');
+Route::resource('posts', PostController::class);
+
+Route::get('/prueba',function () {
+    /*$users = DB::table('users')
+                ->orderBy('id')
+                ->chunkById(100, function($users){
+                    foreach ($users as $user) {
+                        echo $user->name . '<br>';
+                    }
+                });
+
+    return $users;*/
+
+    //otra forma para truncar datos
+    DB::table('users')
+        ->orderBy('id')
+        ->lazyById()->each(function($user){
+            echo $user->name . '<br>';
+        });
 });
